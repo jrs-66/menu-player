@@ -1,9 +1,9 @@
-<div class="full" ng-switch on="data.template.activation_code" ng-show="show">
+<div class="full" ng-switch on="data.activation_code" ng-show="show">
   <div ng-switch-when="EXISTS" class="full vcenter hcenter txt">
-    <div ng-if="!data.template._id">
+    <div ng-if="!template._id">
       Player has been activated, assign a template.
     </div>
-    <div ng-if="data.template._id" js-compile template="data.template.HTML">
+    <div ng-if="template._id" js-compile template="template.HTML">
     </div>
   </div>
 
@@ -13,7 +13,7 @@
 
   <div ng-switch-default class="full vcenter hcenter activation_box" >
     <div class="activation_code">
-      {{ data.template.activation_code }}
+      {{ template.activation_code }}
     </div>
     activation code
   </div>

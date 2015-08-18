@@ -9,7 +9,8 @@ angular.module('menuPlayerApp')
       success(function(data, status, headers, config) {
         var player_id =  + data.player_id;
         playerSocket.on('activation_' + player_id, function(data) {
-          $scope.data.activation_code = 'EXISTS';
+          data.activation_code = 'EXISTS';
+          $scope.data = data;
         });
         playerSocket.on('player_delete_' + player_id, function(data) {
           $window.location.reload();
@@ -28,6 +29,7 @@ angular.module('menuPlayerApp')
         if (data.template_id) {
           $http.get('/api/templates/' + data.template_id).success( function(template, status, headers, config) {
             //data.HTML = data2.HTML;
+            template.activation_code = "EXISTS";
             $scope.data = template;
             $scope.show = true;
           })
