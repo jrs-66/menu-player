@@ -22,6 +22,12 @@ module.exports = function (grunt) {
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
+	
+
+grunt.loadNpmTasks('grunt-forever');
+
+
+
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -33,6 +39,14 @@ module.exports = function (grunt) {
       client: require('./bower.json').appPath || 'client',
       dist: 'dist'
     },
+forever: {
+  server: {
+    options: {
+      index: 'server/app1.js',
+      logDir: 'logs'
+    }
+  }
+},
     express: {
       options: {
         port: process.env.PORT || 8081

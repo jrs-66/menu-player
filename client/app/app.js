@@ -14,7 +14,7 @@ angular.module('menuPlayerApp', [
   $locationProvider.html5Mode(true);
 })
 .factory('playerSocket', function (socketFactory) {
-  var myIoSocket = window.io.connect('http://localhost:9000/', {transports:['websocket']});
+  var myIoSocket = window.io.connect('http://dp23.com:9000/', {transports:['websocket']});
   var mySocket = socketFactory({
       ioSocket: myIoSocket
   });
