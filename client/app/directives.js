@@ -1,7 +1,7 @@
 app.directive("jsCompile", function($compile) {
   return {
     scope: {
-        template: '=',
+        template: '=template',
     },
     link: function(scope, element) {
       console.log("template");
