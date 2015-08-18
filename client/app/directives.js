@@ -1,11 +1,13 @@
 app.directive("jsCompile", function($compile) {
   return {
     scope: {
-        template: '=template',
+        template: '=data',
     },
     link: function(scope, element) {
       console.log("template");
-      console.log(scope.template);
+      console.log(scope.data);
+      console.log(data);
+      console.log(template);
       var template = scope.template;
       template = "<b>should be bold</b>";
       var linkFn = $compile(template);
