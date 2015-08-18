@@ -23,15 +23,15 @@ angular.module('menuPlayerApp')
 
     $http.get('/api/player/check/' + $stateParams.playerid + '/' + $stateParams.modelid).
       success(function(data, status, headers, config) {
-        console.log('SUCCESS');
-        $scope.data = data;
-        console.log($scope.data);
 
-        if ($scope.data.template_id) {
-          $scope.template = "testing";
-          $http.get('/api/templates/' + $scope.data.template_id).success( function(data, status, headers, config) {
+        if (data.template_id) {
+          //$scope.template = "testing";
+          $http.get('/api/templates/' + data.template_id).success( function(data2, status, headers, config) {
             console.log(data);
-            $scope.template = data.HTML;
+            $scope.template = data2.HTML;
+            console.log('SUCCESS');
+            $scope.data = data;
+            console.log($scope.data);
             $scope.show = true;
           })
         }
