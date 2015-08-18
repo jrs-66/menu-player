@@ -3,8 +3,7 @@
     <div ng-if="!data.template_id">
       Player has been activated, assign a template.
     </div>
-    <div ng-if="data.template_id">
-      {{ template}}
+    <div ng-if="data.template_id" js-compile template="template">
     </div>
   </div>
 
