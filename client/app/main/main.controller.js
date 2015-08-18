@@ -14,6 +14,7 @@ angular.module('menuPlayerApp')
     playerSocket.on('template_change', function(data) {
       $http.get('/api/templates/' + data.template_id).success( function(data, status, headers, config) {
         //$scope.template = data.HTML;
+        data.template_id = data._id;
         $scope.data = data;
         //$scope.data.template_id = data._id;
         $scope.show = true;
