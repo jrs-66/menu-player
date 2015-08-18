@@ -22,7 +22,7 @@ module.exports = function (grunt) {
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
-	
+
 
 grunt.loadNpmTasks('grunt-forever');
 
@@ -53,7 +53,7 @@ forever: {
       },
       dev: {
         options: {
-          script: 'server/app.js',
+          script: 'server/app1.js',
           debug: false
         }
       },
@@ -602,7 +602,7 @@ forever: {
       'autoprefixer',
       'express:dev',
       'wait',
-      
+
       'watch'
     ]);
   });
