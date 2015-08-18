@@ -5,29 +5,30 @@ angular.module('menuPlayerApp')
     console.log('MAIN CONTROLLER');
     $scope.show = false;
 
-    playerSocket.on('activation', function(data) {
-      $scope.data.activation_code = 'EXISTS';
-    });
-    playerSocket.on('player_delete', function(data) {
-      $window.location.reload();
-    });
-    playerSocket.on('template_change', function(data) {
-      $http.get('/api/templates/' + data.template_id).success( function(data, status, headers, config) {
-        //$scope.template = data.HTML;
-        data.template_id = data._id;
-        $scope.data = data;
-        //$scope.data.template_id = data._id;
-        $scope.show = true;
-      })
-    });
-
     $http.get('/api/player/check/' + $stateParams.playerid + '/' + $stateParams.modelid).
       success(function(data, status, headers, config) {
+        var player_id =  + data.player_id;
+        playerSocket.on('activation_' + player_id, function(data) {
+          $scope.data.activation_code = 'EXISTS';
+        });
+        playerSocket.on('player_delete_' + player_id, function(data) {
+          $window.location.reload();
+        });
+        playerSocket.on('template_change_' + player_id, function(data) {
+          var template = data.template;
+          //$http.get('/api/templates/' + data.template_id).success( function(data, status, headers, config) {
+          //$scope.template = data.HTML;
+          //data.template_id = data._id;
+          $scope.data = template;
+          //$scope.data.template_id = data._id;
+          $scope.show = true;
+          //})
+        });
 
         if (data.template_id) {
-          $http.get('/api/templates/' + data.template_id).success( function(data2, status, headers, config) {
-            data.HTML = data2.HTML;
-            $scope.data = data;
+          $http.get('/api/templates/' + data.template_id).success( function(template, status, headers, config) {
+            //data.HTML = data2.HTML;
+            $scope.data = template;
             $scope.show = true;
           })
         }

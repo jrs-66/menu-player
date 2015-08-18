@@ -14,13 +14,11 @@ exports.player = function() {
         if (doc.activation_code) {
           // player known, but not activated
           console.log('player known, not activated');
-
-          res.json({'activation_code': doc.activation_code});
+          res.json({player_id: doc._id, activation_code: doc.activation_code});
           return;
         }
-
         // player exists
-        res.json({'activation_code': 'EXISTS', 'template_id': doc.template_id});
+        res.json({player_id: doc._id, activation_code: 'EXISTS', 'template_id': doc.template_id});
 
       } else {
         // new player, generate activation code
@@ -31,10 +29,11 @@ exports.player = function() {
           activation_code: rString,
           playerid: playerid,
           modelid: modelid
+        }, function(err, records) {
+          console.log({activation_code: rString, playerid: playerid, modelid: modelid, merchant_id: 'my_id'});
+          console.log('INSERTED');
+          res.json({player_id: records[0]._id, activation_code: rString});
         });
-        console.log({activation_code: rString, playerid: playerid, modelid: modelid, merchant_id: 'my_id'});
-        console.log('INSERTED');
-        res.json({'activation_code': rString});
       }
     });
   }
