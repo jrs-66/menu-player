@@ -5,9 +5,9 @@ app.directive("jsCompile", function($compile) {
     },
     link: function(scope, element) {
       console.log("template");
-      console.log(scope.data);
-      console.log(data);
-      console.log(template);
+      console.log(scope);
+      //console.log(data);
+      //console.log(template);
       var template = scope.template;
       template = "<b>should be bold</b>";
       var linkFn = $compile(template);
