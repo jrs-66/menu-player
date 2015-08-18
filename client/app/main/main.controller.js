@@ -12,8 +12,6 @@ angular.module('menuPlayerApp')
       $window.location.reload();
     });
     playerSocket.on('template_change', function(data) {
-      console.log(data)
-
       $http.get('/api/templates/' + data.template_id).success( function(data, status, headers, config) {
         console.log("success");
         console.log(data);
@@ -30,7 +28,7 @@ angular.module('menuPlayerApp')
         console.log($scope.data);
 
         if ($scope.data.template_id) {
-
+          $scope.template = "testing";
           $http.get('/api/templates/' + $scope.data.template_id).success( function(data, status, headers, config) {
             console.log(data);
             $scope.template = data.HTML;
