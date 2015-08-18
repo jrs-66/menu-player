@@ -4,6 +4,8 @@ app.directive("jsCompile", function($compile) {
         template: '=',
     },
     link: function(scope, element) {
+      console.log("template");
+      console.log(scope.template);
       var template = scope.template;
       var linkFn = $compile(template);
       var content = linkFn(scope);
