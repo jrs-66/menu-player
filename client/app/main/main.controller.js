@@ -13,10 +13,9 @@ angular.module('menuPlayerApp')
     });
     playerSocket.on('template_change', function(data) {
       $http.get('/api/templates/' + data.template_id).success( function(data, status, headers, config) {
-        console.log("success");
-        console.log(data);
-        $scope.template = data.HTML;
-        $scope.data.template_id = data._id;
+        //$scope.template = data.HTML;
+        $scope.data = data;
+        //$scope.data.template_id = data._id;
         $scope.show = true;
       })
     });
@@ -25,17 +24,12 @@ angular.module('menuPlayerApp')
       success(function(data, status, headers, config) {
 
         if (data.template_id) {
-          //$scope.template = "testing";
           $http.get('/api/templates/' + data.template_id).success( function(data2, status, headers, config) {
-            console.log(data);
-            $scope.template = data2.HTML;
-            console.log('SUCCESS');
+            data.HTML = data2.HTML;
             $scope.data = data;
-            console.log($scope.data);
             $scope.show = true;
           })
         }
-        $scope.show = true;
       }).
       error(function(data, status, headers, config) {
         console.log('ERROR');
