@@ -16,6 +16,7 @@ angular.module('menuPlayerApp')
         playerSocket.on('player_delete_' + player_id, function(data) {
           $window.location.reload();
         });
+        console.log("listener for " + 'template_change_' + player_id);
         playerSocket.on('template_change_' + player_id, function(data) {
           console.log("template changed");
           var template = data.template;
