@@ -7,10 +7,10 @@ angular.module('menuPlayerApp')
 
     $http.get('/api/player/check/' + $stateParams.playerid + '/' + $stateParams.modelid).
       success(function(data, status, headers, config) {
-        console.log("player " + data._id);
-        var player_id =  + data._id;
+        console.log("player " + data.player_id);
+        var player_id =  data.player_id;
         console.log(data);
-        console.log(player_id + " is current player");
+        console.log(data.player_id + " is current player");
         playerSocket.on('activation_' + player_id, function(data) {
           data.activation_code = 'EXISTS';
           $scope.data = data;
