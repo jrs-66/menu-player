@@ -21,7 +21,9 @@ angular.module('menuPlayerApp')
         console.log("listener for " + 'template_change_' + player_id);
         playerSocket.on('template_change_' + player_id, function(data) {
           console.log("template changed");
+
           var template = data.template;
+          template.activation_code = 'EXISTS';
           //$http.get('/api/templates/' + data.template_id).success( function(data, status, headers, config) {
           //$scope.template = data.HTML;
           //data.template_id = data._id;
