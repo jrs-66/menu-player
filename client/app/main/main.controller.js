@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('menuPlayerApp')
-  .controller('MainCtrl', ['$scope', '$http', '$stateParams', 'playerSocket', '$window', function ($scope, $http, $stateParams, playerSocket, $window) {
+  .controller('MainCtrl', ['$scope', '$timeout', '$http', '$stateParams', 'playerSocket', '$window', function ($scope, $timeout, $http, $stateParams, playerSocket, $window) {
     console.log('MAIN CONTROLLER');
     $scope.show = false;
 
