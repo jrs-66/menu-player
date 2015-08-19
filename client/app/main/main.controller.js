@@ -17,6 +17,7 @@ angular.module('menuPlayerApp')
           $window.location.reload();
         });
         playerSocket.on('template_change_' + player_id, function(data) {
+          console.log("template changed");
           var template = data.template;
           //$http.get('/api/templates/' + data.template_id).success( function(data, status, headers, config) {
           //$scope.template = data.HTML;
