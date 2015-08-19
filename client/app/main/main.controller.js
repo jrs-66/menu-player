@@ -27,10 +27,10 @@ angular.module('menuPlayerApp')
           //$http.get('/api/templates/' + data.template_id).success( function(data, status, headers, config) {
           //$scope.template = data.HTML;
           //data.template_id = data._id;
-          $scope.data = template;
-          //$scope.data.template_id = data._id;
-          $scope.show = true;
-          //})
+          $timeout(function(){
+            $scope.data = template;
+            $scope.show = true;
+          })
         });
 
         if (data.template_id) {
