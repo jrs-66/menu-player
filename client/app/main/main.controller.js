@@ -28,7 +28,7 @@ angular.module('menuPlayerApp')
 
         if (data.template_id) {
           $http.get('/api/templates/' + data.template_id).success( function(template, status, headers, config) {
-            //data.HTML = data2.HTML;
+            console.log("player exists with template - " + template.HTML);
             template.activation_code = "EXISTS";
             $scope.data = template;
             $scope.show = true;
