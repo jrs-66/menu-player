@@ -16,8 +16,10 @@ angular.module('menuPlayerApp')
           $scope.data = data;
         });
 
-        playerSocket.on('player_delete_' + player_id, function(data) {
-          $window.location.reload();
+        playerSocket.on('player_delete', function(data) {
+          if (data._id === player_id) {
+            $window.location.reload();
+          }
         });
 
         playerSocket.on('template_change_' + player_id, function(data) {
