@@ -2,56 +2,53 @@
 
 angular.module('menuPlayerApp')
   .controller('MainCtrl', ['$scope', '$timeout', '$http', '$stateParams', 'playerSocket', '$window', function ($scope, $timeout, $http, $stateParams, playerSocket, $window) {
-    console.log('MAIN CONTROLLER');
-    $scope.show = false;
 
-    $http.get('/api/player/check/' + $stateParams.playerid + '/' + $stateParams.modelid).
-      success(function(data, status, headers, config) {
-        console.log("player " + data.player_id);
+    $http.get('/api/player/check/' + $stateParams.playerid + '/' + $stateParams.modelid).then(function(response) {
+
+        var data = response.data;
+        data._id = 0;
+        console.log("templatedata");
+        console.log(data._id);
         var player_id =  data.player_id;
-        console.log(data);
-        console.log(data.player_id + " is current player");
+
         playerSocket.on('activation_' + player_id, function(data) {
-          data.activation_code = 'EXISTS';
+          data._id = -1;
           $scope.data = data;
         });
+
         playerSocket.on('player_delete_' + player_id, function(data) {
           $window.location.reload();
         });
-        console.log("listener for " + 'template_change_' + player_id);
+
         playerSocket.on('template_change_' + player_id, function(data) {
           console.log("template changed");
 
           var template = data.template;
-          template.activation_code = 'EXISTS';
-          //$http.get('/api/templates/' + data.template_id).success( function(data, status, headers, config) {
-          //$scope.template = data.HTML;
-          //data.template_id = data._id;
+
+          $scope.data = null;
           $timeout(function(){
             $scope.data = template;
-            $scope.show = true;
           })
+        });
+
+        $scope.$on('$destroy', function (event) {
+          playerSocket.removeAllListeners();
         });
 
         if (data.template_id) {
           $http.get('/api/templates/' + data.template_id).success( function(template, status, headers, config) {
             console.log("player exists with template - " + template.HTML);
-            template.activation_code = "EXISTS";
             $scope.data = template;
-            $scope.show = true;
           })
+        } else {
+          data._id = -1;
+          $scope.data = data;
         }
-      }).
-      error(function(data, status, headers, config) {
-        console.log('ERROR');
-        $scope.data.activation_code = 'ERROR';
-        $scope.show = true;
       });
   }])
 
   .controller('PlayCtrl', ['$scope', '$http', '$stateParams', 'playerSocket', function($scope, $http, $stateParams, playerSocket) {
     $http.get('/api/templates/' + $scope.data.template_id).success( function(data, status, headers, config) {
       $scope.template = data.HTML;
-      $scope.show = true;
     })
   }])

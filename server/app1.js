@@ -11,10 +11,9 @@ var express = require('express');
 var config = require('./config/environment');
 var app = express();
 var server = require('http').createServer(app);
-
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('web:web@localhost:27017/menu');
+var db = monk('web:web@localhost:6666/menu');
 
 // add db connection to request
 app.use(function(req,res,next) {
