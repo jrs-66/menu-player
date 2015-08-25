@@ -26,7 +26,7 @@ angular.module('menuPlayerApp')
           console.log("template changed");
 
           var template = data.template;
-
+          console.log(template);
           $scope.data = null;
           $timeout(function(){
             $scope.data = template;
