@@ -24,7 +24,7 @@ angular.module('menuPlayerApp')
 
         playerSocket.on('template_change_' + player_id, function(data) {
           console.log("template changed");
-
+          console.log(data);
           var template = data.template;
           console.log(template);
           $scope.data = null;
